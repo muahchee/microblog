@@ -13,9 +13,6 @@
   <header>
     <h1>Muahchee's microblog</h1>
     <nav>
-    <% if (!locals.currentUser) {%>
-      <a href="/login">Log In</a>
-      <% } %>
       <%- include("partials/error.ejs") %>
       <% if (locals.currentUser) {%>
         <a href="/logout">Log Out</a>

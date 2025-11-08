@@ -24,9 +24,9 @@ export async function getAllPosts() {
 
 export async function makePost(obj) {
   const sql =
-    "INSERT INTO posts (text, timestamp, imgfile, imgalt) VALUES ($1, $2, $3, $4)";
+    "INSERT INTO posts (userid, text, timestamp, imgfile, imgalt) VALUES ($1, $2, $3, $4, $5)";
 
-  await pool.query(sql, [obj.text, obj.timestamp, obj.imgfile, obj.imgalt]);
+  await pool.query(sql, [obj.userid, obj.text, obj.timestamp, obj.imgfile, obj.imgalt]);
 }
 
 export async function deletePost(postid) {
