@@ -49,10 +49,10 @@
           <% } %>
 
           <div class="post-main">
-            <p><%= posts[i].text %></p>
+            <p><%- posts[i].text %></p>
           </div>
 
-          <p><%=new Date(posts[i].timestamp).toLocaleString()%></p>
+          <p class="timestamp"><%=new Date(posts[i].timestamp).toLocaleString()%></p>
 
           <% if (locals.currentUser) {%>
 

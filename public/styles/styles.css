@@ -42,7 +42,7 @@ body.dark-mode {
   --focus: #fdcb6e;
 }
 
-h1 {
+header h1 {
   text-align: center;
 }
 
@@ -124,6 +124,10 @@ li.post div.post-cont {
 
 li.post img {
   align-self: center;
+}
+
+p.timestamp {
+  margin-left: auto;
 }
 
 span.kaomoji {
