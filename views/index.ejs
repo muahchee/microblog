@@ -57,7 +57,7 @@
           <% if (locals.currentUser) {%>
 
           <% if (currentUser.admin) {%>
-          <a href="/<%= posts[i].id %>/delete">Delete</a>
+          <a href="/<%= posts[i].id %>/delete" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
           <% } %>
 
           <% } %>
