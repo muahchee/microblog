@@ -43,7 +43,7 @@
 
           <p><%= posts[i].text %></p>
 
-          <p><%= new Date().toLocaleString(posts[i].timestamp)%></p>
+          <p><%=new Date(posts[i].timestamp).toLocaleString()%></p>
           
           <% if (locals.currentUser) {%>
       

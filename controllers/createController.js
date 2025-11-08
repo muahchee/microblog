@@ -23,7 +23,7 @@ export const createPost = [
     await makePost({
       userid: req.user.id,
       text: text,
-      timestamp: new Date().toLocaleDateString(),
+      timestamp: new Date(),
       imgfile: filename,
       imgalt: imgalt,
     });

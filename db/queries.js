@@ -8,6 +8,12 @@ export async function getUserById(id) {
   return rows[0];
 }
 
+export async function getPostById(id) {
+  const sql = format("SELECT * FROM posts WHERE id=%s;", id);
+  const { rows } = await pool.query(sql);
+  return rows[0];
+}
+
 export async function getUserbyUsername(username) {
   const sql = format("SELECT * FROM users WHERE username LIKE %L", username);
 

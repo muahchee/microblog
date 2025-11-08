@@ -22,6 +22,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const assetsPath = path.join(__dirname, "public");
 const PORT = process.env.PORT || 3000;
 
+// console.log(__dirname)
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(e.static(assetsPath));
