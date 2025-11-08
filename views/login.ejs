@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <title>Log In</title>
+</head>
+
+<body>
+  <header>
+    <h1>Log In</h1>
+  </header>
+
+  <main>
+    <a href="/">Go Back</a>
+    <%- include("partials/error.ejs") %>
+
+    <form action="/login" method="post">
+      <p>
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username" value="<% if (locals.obj) { %> <%= obj.username %><% } %>" required />
+      </p>
+      <p>
+        <label for="pw">Password: </label>
+        <input type="password" id="password" name="password" required />
+      </p>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+  <footer>
+    <p>Created by <a href="https://muahchee.net/">muahchee</a>!</p>
+  </footer>
+</body>
+
+</html>

@@ -1,17 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <title>Microblog</title>
 </head>
+
 <body>
-  <form action="/stats" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-      <input type="file" class="form-control-file" name="uploaded_file">
-      <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
-      <input type="submit" value="Get me the stats!" class="btn btn-default">
-    </div>
-  </form>
+  <header>
+    <h1>Muahchee's microblog</h1>
+    <nav>
+    <% if (!locals.currentUser) {%>
+      <a href="/login">Log In</a>
+      <% } %>
+      <%- include("partials/error.ejs") %>
+      <% if (locals.currentUser) {%>
+        <a href="/logout">Log Out</a>
+      
+        <% if (currentUser.admin) {%>
+        <p>All hail, the almighty ADMIN!</p>
+        <% } %>
+      
+        <a href="/create">Create a Post!</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2 class="off-screen">Feed</h2>
+    <ul>
+
+      <% if (locals.posts) {%>
+
+        <% for (let i = posts.length-1; i > -1; i--) { %>
+
+        <li class="post">
+
+          <% if (posts[i].imgfile) { %>
+            <img src="../uploads/<%= posts[i].imgfile %>" alt="<%= posts[i].imgalt %>">
+          <% } %>
+
+          <p><%= posts[i].text %></p>
+
+          <p><%= new Date().toLocaleString(posts[i].timestamp)%></p>
+          
+          <% if (locals.currentUser) {%>
+      
+            <% if (currentUser.admin) {%>
+            <a href="/<%= posts[i].id %>/delete">Delete</a>
+            <% } %>
+          <!-- if currentUser end -->
+
+          <% } %>
+        </li>
+
+        <% } %>
+        <!-- for loop end -->
+      <% } %>
+      <!-- if posts end -->
+    </ul>
+
+  </main>
+  <footer>
+    <p>Created by <a href="https://muahchee.net/">muahchee</a>!</p>
+  </footer>
 </body>
+
 </html>

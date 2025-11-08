@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Post</title>
+</head>
+
+<body>
+  <a href="/">Go Back</a>
+  <h1>Create a Post</h1>
+  <%- include("partials/error.ejs") %>
+
+  <form action="/create" enctype="multipart/form-data" method="post">
+
+    <p>
+      <label for="imgfile">Upload image?</label>
+      <input type="file" id="imgfile" name="imgfile" />
+    </p>
+
+    <p>
+      <label for="imgalt">Image alt: </label>
+      <input type="text" id="imgalt" name="imgalt">
+    </p>
+
+    <p>
+      <label for="text" class="offscreen">Post text:</label>
+      <textarea name="text" id="text" required></textarea>
+    </p>
+
+    <button type="submit">Submit</button>
+
+  </form>
+</body>
+
+</html>

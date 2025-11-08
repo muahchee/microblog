@@ -8,7 +8,8 @@
     "prod": "node --watch app.js prod",
     "dev-db": "node db/populatedb.js dev",
     "prod-db": "node db/populatedb.js prod",
-    "session-store": "psql microblog < node_modules/connect-pg-simple/table.sql"
+    "session-store": "psql microblog < node_modules/connect-pg-simple/table.sql",
+    "add-me-dev": "node db/addMe.js dev"
   },
   "repository": {
     "type": "git",

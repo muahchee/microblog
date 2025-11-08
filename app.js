@@ -8,7 +8,14 @@ const pgSession = connectPgSimple(session);
 
 import dotenv from "dotenv";
 
-import multer from "multer";
+import { pool } from "./db/pool.js";
+import "./auth/passportConfig.js";
+import { indexRouter } from "./routes/indexRouter.js";
+import { createRouter } from "./routes/createRouter.js";
+import { isAdmin } from "./auth/authMiddle.js";
+import { deleteGet } from "./controllers/deleteController.js";
+
+dotenv.config();
 
 const app = e();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -21,18 +28,57 @@ app.use(e.static(assetsPath));
 app.use(urlencoded({ extended: true }));
 app.use(e.json());
 
-app.get("/", (req, res) => {
-  res.render("index")
-})
+//-------passport auth stuff---------
 
-const upload = multer({ dest: './public/uploads/' })
-app.post('/stats', upload.single('uploaded_file'), function (req, res) {
-  // req.file is the name of your file in the form above, here 'uploaded_file'
-  // req.body will hold the text fields, if there were any
-  console.log(req.file, req.body)
-  res.redirect("/")
+const sessionStore = new pgSession({
+  pool: pool,
 });
 
+app.use(
+  session({
+    store: sessionStore,
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+
+app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+//---------------routes-----------------
+
+app.use("/", indexRouter);
+app.use("/create", isAdmin, createRouter);
+app.get("/:id/delete", isAdmin, deleteGet)
+
+//--login/logout--
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  })
+);
+app.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+});
+
+//-------port and error handling---------
 
 app.listen(PORT, (err) => {
   if (err) throw err;

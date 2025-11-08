@@ -9,16 +9,21 @@ dotenv.config();
 const { connectionString } = getEnv(argv);
 
 const SQL = `
-CREATE TABLE IF NOT EXISTS posts (
+
+CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  text TEXT,
-  timestamp TIMESTAMP,
+  username VARCHAR(255),
+  password VARCHAR(255),
+  admin BOOLEAN
 );
 
-CREATE TABLE IF NOT EXISTS images (
+CREATE TABLE IF NOT EXISTS posts (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  postid INTEGER REFERENCES posts,
-  filname TEXT,
+  userid INTEGER REFERENCES users,
+  text TEXT,
+  timestamp TIMESTAMP,
+  imgfile TEXT,
+  imgalt VARCHAR(255)
 );
 
 `;
@@ -31,6 +36,7 @@ async function main() {
   await client.connect();
   await client.query(SQL);
   await client.end();
+
   console.log("done");
 }
 
