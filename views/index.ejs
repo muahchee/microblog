@@ -7,56 +7,66 @@
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/styles.css">
   <title>Microblog</title>
+  <script src="../scripts/lightswitch.js" defer></script>
 </head>
 
 <body>
   <header>
-    <h1>Muahchee's microblog</h1>
+    <h1>Muahchee's microblog <span class="kaomoji">( ・・)つ .*･｡ﾟ</span></h1>
+
+    <%- include("partials/error.ejs") %>
+    <% if (locals.currentUser) {%>
     <nav>
-      <%- include("partials/error.ejs") %>
-      <% if (locals.currentUser) {%>
-        <a href="/logout">Log Out</a>
-      
-        <% if (currentUser.admin) {%>
-        <p>All hail, the almighty ADMIN!</p>
-        <% } %>
-      
-        <a href="/create">Create a Post!</a>
-      <% } %>
+      <a href="/logout">Log Out</a>
+      <a href="/create">Create a Post!</a>
     </nav>
+    <% } %>
+
+    <button class="mode-toggle" aria-label="dark mode" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M8 6v12h8V6zm6 4h-4V8h4zm5.4-8.4C19 1.2 18.5 1 18 1H6c-.5 0-1 .2-1.4.6S4 2.5 4 3v18c0 .5.2 1 .6 1.4s.9.6 1.4.6h12c.5 0 1-.2 1.4-.6s.6-.9.6-1.4V3c0-.5-.2-1-.6-1.4M18 21H6V3h12z" />
+      </svg></button>
+    
+      <% if (locals.currentUser) {%>
+        <% if (currentUser.admin) {%>
+        <p>ADMIN MODE</p>
+        <% } %>
+        <% } %>
   </header>
 
   <main>
 
     <h2 class="off-screen">Feed</h2>
-    <ul>
+    <ul class="feed">
 
       <% if (locals.posts) {%>
 
-        <% for (let i = posts.length-1; i > -1; i--) { %>
+      <% for (let i = posts.length-1; i > -1; i--) { %>
 
-        <li class="post">
-
+      <li class="post drop-shadow">
+        <div class="post-cont">
           <% if (posts[i].imgfile) { %>
-            <img src="../uploads/<%= posts[i].imgfile %>" alt="<%= posts[i].imgalt %>">
+          <img src="../uploads/<%= posts[i].imgfile %>" alt="<%= posts[i].imgalt %>">
           <% } %>
 
-          <p><%= posts[i].text %></p>
+          <div class="post-main">
+            <p><%= posts[i].text %></p>
+          </div>
 
           <p><%=new Date(posts[i].timestamp).toLocaleString()%></p>
-          
+
           <% if (locals.currentUser) {%>
-      
-            <% if (currentUser.admin) {%>
-            <a href="/<%= posts[i].id %>/delete">Delete</a>
-            <% } %>
-          <!-- if currentUser end -->
+
+          <% if (currentUser.admin) {%>
+          <a href="/<%= posts[i].id %>/delete">Delete</a>
+          <% } %>
 
           <% } %>
-        </li>
+          <!-- if currentUser end -->
+        </div>
+      </li>
 
-        <% } %>
-        <!-- for loop end -->
+      <% } %>
+      <!-- for loop end -->
       <% } %>
       <!-- if posts end -->
     </ul>
