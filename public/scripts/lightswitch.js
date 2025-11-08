@@ -32,7 +32,6 @@ modeToggleBtn.addEventListener("click", () => {
 });
 
 function getTheme() {
-  console.log("savedtheme" + savedTheme);
   if (savedTheme === "dark-mode") {
     document.body.className = "";
     document.body.className = "dark-mode";
