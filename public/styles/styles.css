@@ -272,6 +272,8 @@ dialog {
   margin: auto;
   border: none;
   background-color: transparent;
+  width: min(1000px, 90vw);
+padding: 50px 0;
 }
 
 dialog img {
@@ -282,6 +284,7 @@ dialog form {
   position: fixed;
   left: 40%;
   top: 0;
+  padding: 0
 }
 
 dialog button.close {
