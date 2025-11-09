@@ -14,6 +14,8 @@ import { indexRouter } from "./routes/indexRouter.js";
 import { createRouter } from "./routes/createRouter.js";
 import { isAdmin } from "./auth/authMiddle.js";
 import { deleteGet } from "./controllers/deleteController.js";
+import { updateGet, updatePost } from "./controllers/updateController.js";
+import { upload } from "./helpers/multerConfig.js";
 
 dotenv.config();
 
@@ -57,7 +59,9 @@ app.use((req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/create", isAdmin, createRouter);
-app.get("/:id/delete", isAdmin, deleteGet)
+app.get("/:id/delete", isAdmin, deleteGet);
+app.get("/:id/update", isAdmin, updateGet);
+app.post("/:id/update", isAdmin, upload.single("imgfile"), updatePost);
 
 //--login/logout--
 

@@ -10,7 +10,6 @@ export async function intialPostsGet(req, res) {
 
 export async function nextPostsGet(req, res) {
   const currentPage = req.params.page;
-  console.log(currentPage);
   const posts = await getTenPosts(currentPage);
 
   if (posts.length < 1) {

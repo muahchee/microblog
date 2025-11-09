@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <title>Update a Post</title>
+  <link rel="icon" type="image/x-icon" href="../images/notepad_1.ico">
+  <script src="../scripts/lightswitch.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <a href="/">Go Back</a>
+    <h1>Update a Post</h1>
+    <button class="mode-toggle" aria-label="dark mode" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.598 1.591a.75.75 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786m1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678"/></svg></button>
+  </header>
+  <main>
+
+    <a href="https://muahchee.github.io/scruffyWiki/Markdown%20Cheatsheet/">Markdown Cheatsheet</a>
+
+    <%- include("partials/error.ejs") %>
+
+    <form action="/<%= post.id %>/update" enctype="multipart/form-data" method="post">
+      <% if (post.imgfile) { %>
+        <img class="preview" src="../uploads/<%= post.imgfile %>" alt="<%= post.imgalt %>">
+      <% } %>
+      <p>
+        <label for="imgfile">Upload image?</label>
+        <input class="drop-shadow" type="file" id="imgfile" name="imgfile" />
+      </p>
+      <script src="../scripts/compress.js"></script>
+      <p>
+        <label for="imgalt">Image alt: </label>
+        <input class="drop-shadow" type="text" id="imgalt" name="imgalt" value="<%= post.imgalt %>">
+      </p>
+      <p>
+        <label for="text">Post text:</label>
+        <textarea class="drop-shadow" name="text" id="text" required><%= post.text %></textarea>
+      </p>
+      <button type="submit">Submit</button>
+  </main>
+
+  </form>
+</body>
+
+</html>

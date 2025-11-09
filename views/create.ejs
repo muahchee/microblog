@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/styles.css">
   <title>Create a Post</title>
-  <link rel="icon" type="image/x-icon" href="../images/agentsvr.exe_14_113-1.png">
+  <link rel="icon" type="image/x-icon" href="../images/notepad_1.ico">
   <script src="../scripts/lightswitch.js" defer></script>
 </head>
 
@@ -24,7 +24,7 @@
     <form action="/create" enctype="multipart/form-data" method="post">
       <p>
         <label for="imgfile">Upload image?</label>
-        <input class="drop-shadow" type="file" id="imgfile" name="imgfile" />
+        <input class="drop-shadow" type="file" id="imgfile" name="imgfile" accept="image/png, image/jpeg, image/gif" />
       </p>
       <script src="../scripts/compress.js"></script>
       <p>
@@ -37,9 +37,6 @@
       </p>
       <button type="submit">Submit</button>
   </main>
-  <footer>
-    <p>Created by <a href="https://muahchee.net/">muahchee</a>!</p>
-  </footer>
 
   </form>
 </body>

@@ -37,7 +37,7 @@ input.addEventListener("change", async (e) => {
   // For every file in the files list
   for (const file of files) {
     // We don't have to compress files that aren't images or are gifs
-    if (!file.type.startsWith("image") || file.type.includes("gif")) {
+    if (!file.type.startsWith("image") || file.type.includes("gif") || file.type.includes("png")) {
       // Ignore this file, but do add it to our result
       dataTransfer.items.add(file);
       continue;
@@ -45,16 +45,11 @@ input.addEventListener("change", async (e) => {
 
     let compressedFile;
 
-    // We compress the file by 50%
+    // compress jpeg only
     if (file.type.includes("jpeg")) {
       compressedFile = await compressImage(file, {
         quality: 0.8,
         type: "image/jpeg",
-      });
-    } else if (file.type.includes("png")) {
-      compressedFile = await compressImage(file, {
-        quality: 0.8,
-        type: "image/png",
       });
     }
 
