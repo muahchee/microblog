@@ -137,9 +137,21 @@ li.post div.post-cont {
   border: 3px solid var(--borderscolor);
 }
 
-li.post img {
+button.thumb {
   align-self: center;
+  border: none;
+  padding: 0;
+  outline: none;
+  background-color: transparent;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
 }
+
+button.thumb:focus-visible {
+  outline: 2px solid var(--focus);
+}
+
 
 li.post .post-bottom {
   width: 100%;
@@ -173,6 +185,7 @@ a.post-control {
   border: 2px solid var(--accent1);
   border-radius: 23px;
   padding: 0 15px;
+  background-color: var(--accent1);
   text-decoration: none;
 }
 
@@ -244,4 +257,47 @@ svg {
   fill: currentColor;
 }
 
-/* --------------light switch css end--------------- */
+/* --------------lightbox css start--------------- */
+
+/* prevent scrolling */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+::backdrop {
+  background-color: rgb(30, 31, 32);
+}
+
+dialog {
+  margin: auto;
+  border: none;
+  background-color: transparent;
+}
+
+dialog img {
+  margin: auto;
+}
+
+dialog form {
+  position: fixed;
+  left: 40%;
+  top: 0;
+}
+
+dialog button.close {
+  color: white;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 40px;
+  appearance: none;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+dialog button.close:focus-visible {
+  outline: 2px solid var(--focus);
+}
+

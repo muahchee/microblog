@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/styles.css">
   <title>Microblog</title>
+  <link rel="icon" type="image/x-icon" href="../images/agentsvr.exe_14_113-1.png">
   <script src="../scripts/lightswitch.js" defer></script>
+  <script src="../scripts/lightbox.js" defer></script>
 </head>
 
 <body>
@@ -33,10 +35,13 @@
         </div>
       <% } %>
     
-
   </header>
 
   <main>
+  <dialog>
+    <form method="dialog"><button class="close" type="submit"><span>&times;</span></button></form>
+    <img src="" alt="">
+  </dialog>
 
     <h2 class="off-screen">Feed</h2>
     <ul class="feed">
@@ -48,7 +53,7 @@
       <li class="post drop-shadow">
         <div class="post-cont">
           <% if (posts[i].imgfile) { %>
-          <img src="../uploads/<%= posts[i].imgfile %>" alt="<%= posts[i].imgalt %>">
+          <button class="thumb"><img src="../uploads/<%= posts[i].imgfile %>" alt="<%= posts[i].imgalt %>"></button>
           <% } %>
 
           <div class="post-main">
