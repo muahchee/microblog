@@ -181,6 +181,7 @@ p.timestamp {
   margin-left: auto;
 }
 
+footer a,
 a.post-control {
   border: 2px solid var(--accent1);
   border-radius: 23px;
@@ -191,6 +192,14 @@ a.post-control {
 
 span.kaomoji {
   text-wrap: nowrap;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+  padding: 30px;
 }
 
 form {

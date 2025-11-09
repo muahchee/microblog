@@ -48,7 +48,7 @@
 
       <% if (locals.posts) {%>
 
-      <% for (let i = posts.length-1; i > -1; i--) { %>
+      <% for (let i = 0; i < posts.length ; i++) { %>
 
       <li class="post drop-shadow">
         <div class="post-cont">
@@ -85,7 +85,9 @@
 
   </main>
   <footer>
-    
+    <a href="/<%= Number(page) - 1 %>/page">Previous Page</a>
+    <p>Page <%= Number(page)%></p>
+    <a href="/<%= Number(page) + 1 %>/page">Next Page</a>
   </footer>
 </body>
 

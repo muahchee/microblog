@@ -28,6 +28,13 @@ export async function getAllPosts() {
   return rows;
 }
 
+export async function getTenPosts(page) {
+  const sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 10 OFFSET ($1 - 1) * 10;";
+
+  const { rows } = await pool.query(sql, [page]);
+  return rows;
+}
+
 export async function makePost(obj) {
   const sql =
     "INSERT INTO posts (userid, text, timestamp, imgfile, imgalt) VALUES ($1, $2, $3, $4, $5)";
