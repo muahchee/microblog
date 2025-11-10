@@ -35,6 +35,14 @@ export async function getTenPosts(page) {
   return rows;
 }
 
+export async function getTenPostsSearch(page, date1, date2) {
+  const sql =
+    "SELECT * FROM posts WHERE timestamp BETWEEN $1 AND $2 ORDER BY id DESC LIMIT 10 OFFSET ($3 - 1) * 10;";
+
+  const { rows } = await pool.query(sql, [date1, date2, page]);
+  return rows;
+}
+
 export async function makePost(obj) {
   const sql =
     "INSERT INTO posts (userid, text, timestamp, imgfile, imgalt) VALUES ($1, $2, $3, $4, $5)";
@@ -54,15 +62,9 @@ export async function deletePost(postid) {
   await pool.query(sql);
 }
 
-//UPDATE mytable
-// SET column = value_or_expr,
-// other_column = another_value_or_expr,
-// …
-// WHERE condition;
-
 export async function editPost(postid, obj) {
   const sql =
     "UPDATE posts SET text = $1, imgfile = $2, imgalt = $3 WHERE id = $4";
 
-  await pool.query(sql, [obj.text, obj.imgfile, obj.imgalt, postid])
+  await pool.query(sql, [obj.text, obj.imgfile, obj.imgalt, postid]);
 }

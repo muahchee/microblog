@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/styles.css">
-  <title>Microblog</title>
+  <title>Search by Date</title>
   <link rel="icon" type="image/x-icon" href="../images/notepad_1.ico">
   <script src="../scripts/lightswitch.js" defer></script>
   <script src="../scripts/lightbox.js" defer></script>
@@ -14,33 +14,13 @@
 
 <body>
   <header>
-    <h1>muahchee's microblog <span class="kaomoji">( ・・)つ .*･｡ﾟ</span></h1>
+    <a class="link-btn" href="/">Go Back</a>
+    
+    <h1>Search by Date</h1>
 
     <%- include("partials/error.ejs") %>
 
-
     <button class="mode-toggle" aria-label="dark mode" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.598 1.591a.75.75 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786m1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678"/></svg></button>
-
-    <% if (locals.currentUser) {%>
-      <div class="bottom">
-        <% if (currentUser.admin) {%>
-          <p class="bold">ADMIN MODE</p>
-          <% } %>
-          <a class="link-btn" href="/logout" onclick="return confirm('Are you sure you want to log out?')">Log Out</a>
-        <a class="link-btn" href="/create">Create a Post!</a>
-      <% } else {%>
-        <div class="bottom">
-          <a class="link-btn" href="https://muahchee.net/">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.12 10H19V8.2h-3.62l-2-3.33c-.3-.5-.84-.84-1.46-.84-.18 0-.34.03-.5.08L6 5.8V11h1.8V7.33l2.11-.66L6 22h1.8l2.87-8.11L13 17v5h1.8v-6.41l-2.49-4.54.73-2.87M14 3.8c1 0 1.8-.8 1.8-1.8S15 .2 14 .2 12.2 1 12.2 2 13 3.8 14 3.8"/></svg>
-            Back to digital home!
-          </a>
-          <% } %>
-          <a class="link-btn" href="/search">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.68 12.32a4.49 4.49 0 0 0-6.36.01 4.49 4.49 0 0 0 0 6.36 4.51 4.51 0 0 0 5.57.63L21 22.39 22.39 21l-3.09-3.11c1.13-1.77.87-4.09-.62-5.57m-1.41 4.95c-.98.98-2.56.97-3.54 0-.97-.98-.97-2.56.01-3.54.97-.97 2.55-.97 3.53 0 .97.98.97 2.56 0 3.54M10.9 20.1a6.5 6.5 0 0 1-1.48-2.32C6.27 17.25 4 15.76 4 14v3c0 2.21 3.58 4 8 4-.4-.26-.77-.56-1.1-.9M4 9v3c0 1.68 2.07 3.12 5 3.7v-.2c0-.93.2-1.85.58-2.69C6.34 12.3 4 10.79 4 9m8-6C7.58 3 4 4.79 4 7c0 2 3 3.68 6.85 4h.05c1.2-1.26 2.86-2 4.6-2 .91 0 1.81.19 2.64.56A3.22 3.22 0 0 0 20 7c0-2.21-3.58-4-8-4"/></svg>
-            Search by date
-          </a>
-        </div>
- 
     
   </header>
 
@@ -49,6 +29,18 @@
       <form method="dialog"><button class="close" type="submit"><span>&times;</span></button></form>
       <img src="" alt="">
     </dialog>
+      <p>*The time for both dates are 12am.</p>
+     <form class="date-search" action="/search" method="post">
+        <p>
+          <label for="date1">From: </label>
+          <input type="date" id="date1" name="date1" value=<%= date1 %> required />
+        </p>
+        <p>
+          <label for="date2">To: </label>
+          <input type="date" id="date2" name="date2" value=<%= date2 %> required>
+        </p>
+        <button type="submit">Search!</button>
+     </form>
 
     <h2 class="off-screen">Feed</h2>
     <ul class="feed">
@@ -86,15 +78,19 @@
 
       <% } %>
       <!-- for loop end -->
+      <% } else { %>
+        <p>No Results.</p>
       <% } %>
       <!-- if posts end -->
     </ul>
 
   </main>
   <footer>
-    <a class="link-btn" href="/<%= Number(page) - 1 %>/page">Previous Page</a>
-    <p>Page <%= Number(page)%></p>
-    <a class="link-btn" href="/<%= Number(page) + 1 %>/page">Next Page</a>
+    <% if (empty = true && date1 && date2) { %>
+      <a href="/<%= Number(page) - 1 %>/search/?date1=<%= date1 %>&date2=<%= date2 %>" class="link-btn">Previous Page</a>
+      <p>Page <%= Number(page)%></p>
+      <a href="/<%= Number(page) + 1 %>/search/?date1=<%= date1 %>&date2=<%= date2 %>" class="link-btn">Next Page</a>
+    <% } %>
   </footer>
 </body>
 

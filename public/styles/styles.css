@@ -7,11 +7,12 @@ body {
   --accent1: #97c5e0;
   --accent2: #fff0cd;
   --h1: #3880ec;
+  --button: var(--shadow);
 
   --borderscolor: #926a65;
 
   --link: #074d86;
-  --visited: #9247e9;
+  --visited: #6618c0;
   --focus: #f0a00c;
 
   width: min(1000px, 100vw);
@@ -41,11 +42,12 @@ body.dark-mode {
   --accent1: #214675;
   --accent2: #06202c;
   --h1: #ee5eee;
+  --button: var(--accent1);
 
   --borderscolor: #030513;
 
   --link: #98cffc;
-  --visited: #e2afff;
+  --visited: #fdbcff;
   --focus: #fdcb6e;
 }
 
@@ -111,13 +113,6 @@ li.post {
   border: 2px solid var(--borderscolor);
   border-radius: 10px 0 10px 10px;
 
-  /* box-shadow: 2px -2px 0 0 var(--accent1), 0 -2px 0 0 var(--accent1),
-    2px 0 0 0 var(--accent1), 0 2px 0 0 var(--accent1),
-    -2px 0 0 0 var(--accent1), 0 0 0 2px var(--borderscolor),
-    4px -4px 0 0 var(--borderscolor), 0 -4px 0 0 var(--borderscolor),
-    4px 0 0 0 var(--borderscolor), 0 4px 0 0 var(--borderscolor),
-    -4px 0 0 0 var(--borderscolor); */
-
   padding: calc(5px + 1.5vw);
   width: min(600px, 100%);
 }
@@ -182,13 +177,34 @@ p.timestamp {
   margin-left: auto;
 }
 
-footer a,
-a.post-control {
-  border: 2px solid var(--accent1);
-  border-radius: 23px;
+.link-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+form button,
+a.link-btn {
+  border-radius: 10px;
   padding: 0 15px;
-  background-color: var(--accent1);
+  background-color: var(--button);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+form button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+form button:hover,
+form button:focus-visible,
+a.link-btn:hover,
+a.link-btn:focus-visible {
+  transform: translateY(-5px);
 }
 
 span.kaomoji {
@@ -230,6 +246,24 @@ label {
 input[type="text"],
 input[type="password"] {
   width: 100%;
+}
+
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+form.date-search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+form.date-search p {
+  width: max-content;
 }
 
 textarea,
@@ -279,7 +313,7 @@ body:has(dialog[open]) {
 }
 
 ::backdrop {
-  background-color: rgb(30, 31, 32);
+  background-color: #1e1f20;
 }
 
 dialog {
@@ -305,7 +339,7 @@ dialog form {
   padding: 0;
 }
 
-dialog button.close {
+dialog form button.close {
   color: white;
   background-color: transparent;
   outline: none;

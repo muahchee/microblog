@@ -59,9 +59,6 @@ app.use((req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/create", isAdmin, createRouter);
-app.get("/:id/delete", isAdmin, deleteGet);
-app.get("/:id/update", isAdmin, updateGet);
-app.post("/:id/update", isAdmin, upload.single("imgfile"), updatePost);
 
 //--login/logout--
 
