@@ -5,7 +5,7 @@
   "main": "app.js.js",
   "scripts": {
     "dev": "node --watch app.js dev",
-    "prod": "node --watch app.js prod",
+    "start": "node --watch app.js prod",
     "dev-db": "node db/populatedb.js dev",
     "prod-db": "node db/populatedb.js prod",
     "session-store": "psql microblog < node_modules/connect-pg-simple/table.sql",

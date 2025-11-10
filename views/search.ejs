@@ -33,11 +33,11 @@
      <form class="date-search" action="/search" method="post">
         <p>
           <label for="date1">From: </label>
-          <input type="date" id="date1" name="date1" value=<%= date1 %> required />
+          <input type="date" id="date1" name="date1" value="<%= date1 %>" required />
         </p>
         <p>
           <label for="date2">To: </label>
-          <input type="date" id="date2" name="date2" value=<%= date2 %> required>
+          <input type="date" id="date2" name="date2" value="<%= date2 %>" required>
         </p>
         <button type="submit">Search!</button>
      </form>
@@ -71,7 +71,7 @@
             <% } %>
             <!-- if currentUser end -->
 
-            <p class="timestamp"><%=new Date(posts[i].timestamp).toLocaleString()%></p>
+            <p class="timestamp"><%=new Date(posts[i].timestamp).toLocaleString("en-NZ")%></p>
           </div>
         </div>
       </li>

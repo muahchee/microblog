@@ -2,6 +2,7 @@ import { getTenPosts } from "../db/queries.js";
 
 export async function intialPostsGet(req, res) {
   const posts = await getTenPosts(1);
+  console.log(posts[1])
   res.render("index", {
     posts: posts,
     page: 1,

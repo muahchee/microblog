@@ -1,11 +1,27 @@
 import { getTenPosts, getTenPostsSearch } from "../db/queries.js";
+//env
+import dotenv from "dotenv";
+import { argv } from "node:process";
+dotenv.config();
+const env = argv.includes("dev") ? "dev" : "prod";
 
 //---- /search -----
 export async function emptySearchGet(req, res) {
   const posts = await getTenPosts(1);
 
+  let timestamp
+
+  if (env === "dev") {
+    timestamp = new Date().toLocaleDateString("en-NZ");
+  } else if ((env === "prod")) {
+    let d = new Date();
+    d.setHours(d.getHours() + 18);
+    timestamp = d.toLocaleDateString("en-NZ")
+  }
+
+  console.log(env, timestamp.split("-").reverse().join("-"))
   //yyyy-mm-dd
-  const today = new Date().toLocaleDateString("fr-CA", {year:"numeric", month: "2-digit", day:"2-digit"})
+  const today = String(timestamp.split("-").reverse().join("-"));
 
   res.render("search", {
     posts: posts,
@@ -42,7 +58,7 @@ export async function intialResultPostsGet(req, res) {
     page: 1,
     empty: false,
     date1: date1,
-    date2: date2
+    date2: date2,
   });
 }
 
@@ -53,7 +69,6 @@ export async function nextResultPostsGet(req, res) {
   let posts;
   let date1;
   let date2;
-
 
   if (req.query) {
     date1 = req.query.date1;
@@ -71,7 +86,7 @@ export async function nextResultPostsGet(req, res) {
       page: currentPage,
       empty: false,
       date1: date1,
-      date2: date2
+      date2: date2,
     });
   }
 }

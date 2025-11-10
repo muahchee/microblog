@@ -134,6 +134,12 @@ li.post div.post-cont {
   border: 3px solid var(--borderscolor);
 }
 
+.post-cont .post-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 button.thumb {
   align-self: center;
   border: none;
@@ -216,7 +222,7 @@ footer {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-evenly;
-  padding: 30px;
+  padding: 30px 30px 100px 30px;
 }
 
 form {
